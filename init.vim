@@ -29,6 +29,13 @@ Plug 'https://github.com/neovim/nvim-lspconfig'
 Plug 'https://github.com/mfussenegger/nvim-dap'
 Plug 'https://github.com/simrat39/rust-tools.nvim'
 Plug 'https://github.com/nvim-lua/plenary.nvim'
+Plug 'https://github.com/hrsh7th/nvim-cmp'
+Plug 'https://github.com/hrsh7th/cmp-buffer'
+Plug 'https://github.com/hrsh7th/cmp-nvim-lsp'
+Plug 'https://github.com/kyazdani42/nvim-web-devicons'
+Plug 'https://github.com/onsails/lspkind-nvim'
+Plug 'https://github.com/dinhhuy258/git.nvim'
+Plug 'https://github.com/lewis6991/gitsigns.nvim'
 
 call plug#end()
 
