@@ -75,11 +75,12 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 let &shell='bash.exe'
 let &shellcmdflag = '-c'
 let &shellredir = '>%s 2>&1'
-set shellquote= shellxescape=
+set shellquote= 
+set shellxescape=
 set noshelltemp
 set shellxquote=
 let &shellpipe='2>&1 | tee'
-let $TMP="~/tmp"
+let $TMP="/tmp"
 
 set dir=~/tmp
 
