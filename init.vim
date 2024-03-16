@@ -61,44 +61,35 @@ Plug 'https://github.com/dinhhuy258/git.nvim'
 Plug 'https://github.com/lewis6991/gitsigns.nvim'
 Plug 'https://github.com/iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'https://github.com/lervag/vimtex'
-" Plug 'https://github.com/xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+"Plug 'https://github.com/xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
 call plug#end()
 
-" nertree setup
-nnoremap <C-n> :NERDTreeFocus<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-"nnoremap <leader>n :NERDTreeFocus<CR>
-"nnoremap <C-f> :NERDTreeFind<CR>
+"source configs/airline.vim
+let g:airline#extensions#tabline#enabled = 1
 
+"source configs/coc.vim
+let g:coc_global_extensions = [
+			\ 'coc-highlight', 
+			\ 'coc-tsserver',
+			\ 'coc-java',
+			\ 'coc-rust-analyzer',
+			\ 'coc-markdown-preview-enhanced', 
+			\ 'coc-vimtex',
+			\ 'coc-prettier',
+			\ 'coc-yaml',
+			\ 'coc-json',
+			\ 'coc-toml',
+			\ 'coc-sh',
+			\ 'coc-angular',
+			\ 'coc-html',
+			\ 'coc-css'
+			\ ]
+	 "\'coc-snippets',
+   "\'coc-markdownlint', 
+   "\'coc-vetur',
+   "\'coc-go'
 
-let &shell='bash.exe'
-let &shellcmdflag = '-c'
-let &shellredir = '>%s 2>&1'
-set shellquote= 
-set shellxescape=
-set noshelltemp
-set shellxquote=
-let &shellpipe='2>&1 | tee'
-let $TMP="/tmp"
-
-set dir=~/tmp
-
-"let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
-"let &shellcmdflag = '-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';Remove-Alias -Force -ErrorAction SilentlyContinue tee;'
-"let &shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
-"let &shellpipe  = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
-"set shellquote= shellxquote=
-"set noshelltemp
-
-" Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
-" delays and poor user experience
-
-" Use tab for trigger completion with characters ahead and navigate
-" NOTE: There's always complete item selected by default, you may want to enable
-" no select by `"suggest.noselect": true` in your configuration file
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
       \ CheckBackspace() ? "\<Tab>" :
@@ -137,7 +128,6 @@ nmap <leader>rn <Plug>(coc-rename)
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-
 " GoTo code navigation
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -151,6 +141,56 @@ else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
+
+"source configs/markdown.vim
+let g:mkdp_auto_close=1
+let g:mkdp_browser='"C:\Program Files\Google\Chrome\Application\chrome.exe"'
+
+"function OpenMarkdownPreview (url)
+"  execute "silent ! chrome --new-window " . a:url
+"endfunction
+"let g:mkdp_browserfunc = 'OpenMarkdownPreview'
+
+
+"source configs/nerdtree.vim
+" nertree setup
+nnoremap <C-n> :NERDTreeFocus<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+"nnoremap <leader>n :NERDTreeFocus<CR>
+"nnoremap <C-f> :NERDTreeFind<CR>
+
+
+"source configs/shell.vim
+let &shell='bash.exe'
+let &shellcmdflag = '-c'
+let &shellredir = '>%s 2>&1'
+set shellquote= 
+set shellxescape=
+set noshelltemp
+set shellxquote=
+let &shellpipe='2>&1 | tee'
+let $TMP="/tmp"
+
+set dir=~/tmp
+
+"let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
+"let &shellcmdflag = '-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';Remove-Alias -Force -ErrorAction SilentlyContinue tee;'
+"let &shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+"let &shellpipe  = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
+"set shellquote= shellxquote=
+"set noshelltemp
+
+" Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
+" delays and poor user experience
+
+" Use tab for trigger completion with characters ahead and navigate
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config
+
+
+"source configs/tex.vim
 let g:livepreview_previewer = 'mupdf'
 
 "lua require('vimtex-config')
@@ -164,7 +204,6 @@ let g:livepreview_previewer = 'mupdf'
 "syntax enable
 
 " let g:vimtex_quickfix_mode=0
-
 " let g:vimtex_view_general_viewer = 'SumatraPDF'
 
 " Or with a generic interface:
@@ -173,22 +212,6 @@ let g:vimtex_view_method = 'mupdf'
 let g:vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
 " let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 " let maplocalleader = ","
-
-
-let g:mkdp_auto_close=1
-let g:mkdp_browser='"C:\Program Files\Google\Chrome\Application\chrome.exe"'
-
-"function OpenMarkdownPreview (url)
-"  execute "silent ! chrome --new-window " . a:url
-"endfunction
-"let g:mkdp_browserfunc = 'OpenMarkdownPreview'
-
-"let g:coc_global_extensions=]
-"   \'coc-markdownlint', 
-"   \'coc-highlight', 
-"   \'coc-vetur',
-"   \'coc-go'
-"   \]
 
 lua require('configs')
 
